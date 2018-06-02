@@ -5,15 +5,16 @@
  
 # 运行演示
 &nbsp;&nbsp;&nbsp;&nbsp;定义一个MultiKey实现类，如下：
-> public class MMKey extends MultiKeyMapKey {
->      public MMKey(Integer key) {
->          super.addKey(key);
->      } 
->      public MMKey(String key) {
->          super.addKey(key);
->      }
->  }
-
+<code><pre>
+ public class MMKey extends MultiKeyMapKey {
+      public MMKey(Integer key) {
+          super.addKey(key);
+      } 
+      public MMKey(String key) {
+          super.addKey(key);
+      }
+  }
+</pre></code>
 执行结果如下：<br>
 ![image](https://raw.githubusercontent.com/georgeworld/georgeworld.github.com/master/ginkgo/basictoolkit/img/run.png)<br>  
 
