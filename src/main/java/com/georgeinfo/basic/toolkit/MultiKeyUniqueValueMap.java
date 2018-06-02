@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 多键值map
+ * 多键值映射同一个value的多key map
  *
  * @author George (GeorgeWorld@qq.com)
  */
@@ -23,12 +23,8 @@ public class MultiKeyUniqueValueMap<K extends MultiKeyMapKey, V> extends Concurr
             } else {//如果传进来的key不包含真实key，则
                 //循环整个map，寻找可能匹配的key
                 for (Map.Entry<K, V> entry : this.entrySet()) {
-                    if (entry.getKey() == mkey) {
+                    if (entry.getKey().aliasKeyEquals(mkey)) {
                         return entry.getValue();
-                    } else {
-                        if (entry.getKey().keyEquals(mkey)) {
-                            return entry.getValue();
-                        }
                     }
                 }
             }
@@ -72,7 +68,7 @@ public class MultiKeyUniqueValueMap<K extends MultiKeyMapKey, V> extends Concurr
         for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
             put(e.getKey(), e.getValue());
         }
-
     }
+
 
 }

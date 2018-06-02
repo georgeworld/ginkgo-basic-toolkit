@@ -46,10 +46,20 @@ public class TestMKMap {
         MultiKeyUniqueValueMap<MMKey, String> map = new MultiKeyUniqueValueMap<MMKey, String>();
         map.put(new MMKey(1), "第一个元素");
         map.put(new MMKey("first"), "第一个元素");
-        map.put(new MMKey("second"), "第二个元素");
+
+        String value = "第二个元素";
+        map.put(new MMKey("second"), value);
+        map.put(new MMKey(2), value);
+
+        MMKey thirdKey = new MMKey(3);
+        map.put(thirdKey, "第三个元素");
+        thirdKey.addKey("third");
 
         LOG.debug(map.get(new MMKey(1)));
         LOG.debug(map.get(new MMKey("first")));
+        LOG.debug(map.get(new MMKey(2)));
         LOG.debug(map.get(new MMKey("second")));
+        LOG.debug(map.get(new MMKey(3)));
+        LOG.debug(map.get(new MMKey("third")));
     }
 }

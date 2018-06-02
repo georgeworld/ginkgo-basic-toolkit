@@ -5,33 +5,46 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * 多key映射map的默认key对象
+ *
  * @author George (GeorgeWorld@qq.com)
  */
 public class MultiKeyMapKey {
+    /**
+     * 用在map中作为真实key，不能由应用层来赋值，必须在map内部赋值
+     */
     private Integer trueKey;
-    private List<Object> keyList = new ArrayList<Object>();
+    /**
+     * 别名key列表
+     */
+    private List<Object> aliasKeyList = new ArrayList<Object>();
 
 
-    public Integer getTrueKey() {
+    final Integer getTrueKey() {
         return trueKey;
     }
 
-    public void setTrueKey(Integer trueKey) {
+    final void setTrueKey(Integer trueKey) {
         this.trueKey = trueKey;
     }
 
     public void addKey(Object key) {
-        keyList.add(key);
+        aliasKeyList.add(key);
     }
 
-    public List<Object> getKeyList() {
-        return keyList;
+    public List<Object> getAliasKeyList() {
+        return aliasKeyList;
     }
 
     public void bindingKeys(MultiKeyMapKey newKey) {
+        if (newKey == null || newKey.getAliasKeyList().isEmpty()) {
+            return;
+        }
+
+        //合并两个key的别名key列表
         List<Object> newKeyList = new ArrayList<Object>();
-        for (Object key : keyList) {
-            for (Object nkey : newKey.getKeyList()) {
+        for (Object key : aliasKeyList) {
+            for (Object nkey : newKey.getAliasKeyList()) {
                 if (!(key == nkey || (key.getClass() == nkey.getClass()) && (key.equals(nkey)))) {
                     newKeyList.add(nkey);
                 }
@@ -39,11 +52,11 @@ public class MultiKeyMapKey {
         }
 
         if (!newKeyList.isEmpty()) {
-            keyList.addAll(newKeyList);
+            aliasKeyList.addAll(newKeyList);
         }
     }
 
-    public boolean keyEquals(MultiKeyMapKey newKey) {
+    public boolean aliasKeyEquals(MultiKeyMapKey newKey) {
         if (this == newKey) {
             return true;
         }
@@ -51,8 +64,8 @@ public class MultiKeyMapKey {
             return true;
         }
 
-        for (Object key : keyList) {
-            for (Object nkey : newKey.getKeyList()) {
+        for (Object key : aliasKeyList) {
+            for (Object nkey : newKey.getAliasKeyList()) {
                 if ((key.getClass() == nkey.getClass()) && key.equals(nkey)) {
                     return true;
                 }

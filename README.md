@@ -7,12 +7,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;定义一个MultiKey实现类，如下：
 <code><pre>
  public class MMKey extends MultiKeyMapKey {
-      public MMKey(Integer key) {
-          super.addKey(key);
-      } 
-      public MMKey(String key) {
-          super.addKey(key);
-      }
+ &nbsp;&nbsp;     public MMKey(Integer key) {
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         super.addKey(key);
+ &nbsp;&nbsp;     } 
+ &nbsp;&nbsp;     public MMKey(String key) {
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         super.addKey(key);
+ &nbsp;&nbsp;     }
   }
 </pre></code>
 执行结果如下：<br>
